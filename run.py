@@ -4,10 +4,11 @@ from main import BinCreatorApp
 
 def main():
     root = tk.Tk()
-    app = BinCreatorApp()
     
-    # Create GUI with callback to app's method
-    gui = BinCreatorGUI(root, app.create_media_bins)
+    # Create the app first, then pass it to the GUI
+    app = BinCreatorApp()  # We'll set the GUI reference later
+    gui = BinCreatorGUI(root, app)
+    app.gui = gui  # Complete the circular reference
     
     root.mainloop()
 

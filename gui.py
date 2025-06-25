@@ -3,9 +3,9 @@ from tkinter import ttk, filedialog
 from functools import partial
 
 class BinCreatorGUI:
-    def __init__(self, root, on_create_bins_callback):
+    def __init__(self, root, app):
+        self.app = app
         self.root = root
-        self.on_create_bins = on_create_bins_callback
         self.setup_ui()
     
     def setup_ui(self):
@@ -85,7 +85,7 @@ class BinCreatorGUI:
         ttk.Button(
             btn_frame,
             text="Create Media Bins",
-            command=self._on_create_bins
+            command=self.app.create_media_bins
         ).pack(side=tk.LEFT, padx=5)
         
         ttk.Button(
@@ -128,8 +128,4 @@ class BinCreatorGUI:
         if folder_path := filedialog.askdirectory():
             self.folder_entry.delete(0, tk.END)
             self.folder_entry.insert(0, folder_path)
-
-    def _on_create_bins(self):
-        """Handle create bins button click"""
-        self.on_create_bins(self.get_folder_path(), self.add_log_message)
         
